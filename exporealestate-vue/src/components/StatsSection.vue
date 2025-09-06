@@ -13,7 +13,12 @@
       <!-- Intro Section -->
       <div class="stats-intro text-center" :class="{ 'animate': isVisible }">
         <div class="intro-badge">
-          <span class="badge-icon">🏆</span>
+          <span class="badge-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 16L3 5L8.5 12L12 4L15.5 12L21 5L19 16H5ZM12 18C13.1 18 14 17.1 14 16S13.1 14 12 14S10 14.9 10 16S10.9 18 12 18Z"/>
+              <circle cx="12" cy="8" r="2" fill="white" opacity="0.8"/>
+            </svg>
+          </span>
           Международная выставка № 1
         </div>
         <h2>EXPO REAL ESTATE — это встречи с бизнес партнёрами со всего мира, 
@@ -75,14 +80,18 @@
           <h2>Станьте частью уникального мероприятия, аналогов которому в мире еще не было.</h2>
           <div class="cta-features">
             <div class="feature-item" v-for="feature in ctaFeatures" :key="feature.id">
-              <span class="feature-icon">{{ feature.icon }}</span>
+              <span class="feature-icon" v-html="feature.icon"></span>
               <span class="feature-text">{{ feature.text }}</span>
             </div>
           </div>
           <div class="cta-buttons">
             <button class="btn btn-primary btn-large" @click="openModal">
               <span class="btn-text">Получить билет</span>
-              <span class="btn-icon">🎫</span>
+              <span class="btn-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 10V6C22 5.45 21.55 5 21 5H3C2.45 5 2 5.45 2 6V10C3.1 10 4 10.9 4 12S3.1 14 2 14V18C2 18.55 2.45 19 3 19H21C21.55 19 22 18.55 22 18V14C20.9 14 20 13.1 20 12S20.9 10 22 10ZM13 16H11V8H13V16Z"/>
+                </svg>
+              </span>
             </button>
             <button class="btn btn-secondary btn-large" @click="scrollToNext">
               <span class="btn-text">Узнать больше</span>
@@ -186,10 +195,23 @@ export default {
     ])
     
     const ctaFeatures = ref([
-      { id: 1, icon: '🌟', text: 'Эксклюзивный доступ' },
-      { id: 2, icon: '🤝', text: 'Прямые переговоры' },
-      { id: 3, icon: '💎', text: 'VIP сервис' },
-      { id: 4, icon: '📊', text: 'Аналитика рынка' }
+      { id: 1, icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        <circle cx="12" cy="12" r="3" fill="white" opacity="0.8"/>
+      </svg>`, text: 'Эксклюзивный доступ' },
+      { id: 2, icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M21 6.13L19.25 4.38C18.59 3.72 17.66 3.34 16.69 3.34S14.79 3.72 14.13 4.38L12 6.5L9.87 4.38C9.21 3.72 8.28 3.34 7.31 3.34S5.41 3.72 4.75 4.38L3 6.13C2.34 6.79 1.96 7.72 1.96 8.69S2.34 10.59 3 11.25L12 20.25L21 11.25C21.66 10.59 22.04 9.66 22.04 8.69S21.66 6.79 21 6.13Z"/>
+        <path d="M9 9L11 7L15 11L13 13L9 9Z" fill="white" opacity="0.7"/>
+      </svg>`, text: 'Прямые переговоры' },
+      { id: 3, icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6 2L8 4L10 2L12 4L14 2L16 4L18 2L20 4V15L18 13L16 15L14 13L12 15L10 13L8 15L6 13L4 15V4L6 2Z"/>
+        <path d="M8 7H16V9H8V7ZM8 11H16V13H8V11Z" fill="white" opacity="0.8"/>
+        <circle cx="18" cy="6" r="2" fill="#4CAF50" opacity="0.9"/>
+      </svg>`, text: 'VIP сервис' },
+      { id: 4, icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V10H9V17ZM13 17H11V7H13V17ZM17 17H15V13H17V17Z"/>
+        <path d="M5 5L8 2L12 5L16 2L19 5" stroke="#2196F3" stroke-width="1" fill="none" opacity="0.6"/>
+      </svg>`, text: 'Аналитика рынка' }
     ])
     
     const getShapeStyle = (index) => {
