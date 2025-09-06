@@ -332,37 +332,77 @@ export default {
   components: {
     CountriesIcon: {
       template: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path d="M20 5L23 15H33L25 21L28 31L20 25L12 31L15 21L7 15H17L20 5Z" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
+        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <path d="M8 20H32M20 2C25 7 25 13 20 20C15 13 15 7 20 2ZM20 20C25 27 25 33 20 38C15 33 15 27 20 20Z" stroke="currentColor" stroke-width="2"/>
+        <circle cx="15" cy="12" r="2" fill="currentColor"/>
+        <circle cx="25" cy="12" r="2" fill="currentColor"/>
+        <circle cx="15" cy="28" r="2" fill="currentColor"/>
+        <circle cx="25" cy="28" r="2" fill="currentColor"/>
       </svg>`
     },
     PropertiesIcon: {
       template: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path d="M5 15L20 5L35 15V35H25V25H15V35H5V15Z" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
+        <rect x="6" y="12" width="8" height="26" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <rect x="16" y="8" width="8" height="30" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <rect x="26" y="15" width="8" height="23" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <rect x="8" y="16" width="2" height="2" fill="currentColor"/>
+        <rect x="8" y="20" width="2" height="2" fill="currentColor"/>
+        <rect x="18" y="12" width="2" height="2" fill="currentColor"/>
+        <rect x="18" y="16" width="2" height="2" fill="currentColor"/>
+        <rect x="28" y="19" width="2" height="2" fill="currentColor"/>
+        <rect x="28" y="23" width="2" height="2" fill="currentColor"/>
       </svg>`
     },
     ParticipantsIcon: {
       template: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <circle cx="15" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
-        <circle cx="25" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
-        <path d="M5 35C5 28 10 23 15 23C17 23 19 24 20 25C21 24 23 23 25 23C30 23 35 28 35 35" stroke="currentColor" stroke-width="2"/>
+        <circle cx="20" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
+        <circle cx="12" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.15"/>
+        <circle cx="28" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.15"/>
+        <circle cx="8" cy="22" r="2.5" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <circle cx="32" cy="22" r="2.5" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <path d="M12 32C12 28 15 25 20 25C25 25 28 28 28 32" stroke="currentColor" stroke-width="2"/>
+        <path d="M6 35C6 32 8 30 12 30" stroke="currentColor" stroke-width="2"/>
+        <path d="M34 35C34 32 32 30 28 30" stroke="currentColor" stroke-width="2"/>
       </svg>`
     },
     VisitorsIcon: {
       template: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path d="M20 20C23 20 25.5 17.5 25.5 14S23 8 20 8S14.5 10.5 14.5 14S17 20 20 20Z" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
-        <path d="M32 35C32 28 26.5 23 20 23S8 28 8 35" stroke="currentColor" stroke-width="2"/>
+        <circle cx="20" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
+        <circle cx="10" cy="15" r="2.5" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.15"/>
+        <circle cx="30" cy="15" r="2.5" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.15"/>
+        <circle cx="15" cy="20" r="2" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <circle cx="25" cy="20" r="2" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <circle cx="5" cy="25" r="1.5" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.05"/>
+        <circle cx="35" cy="25" r="1.5" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.05"/>
+        <path d="M8 35C8 30 13 26 20 26C27 26 32 30 32 35" stroke="currentColor" stroke-width="2"/>
+        <path d="M4 37C4 34 6 32 10 32" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M36 37C36 34 34 32 30 32" stroke="currentColor" stroke-width="1.5"/>
       </svg>`
     },
     ValueIcon: {
       template: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path d="M20 5L35 20L20 35L5 20L20 5Z" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
-        <path d="M15 17L20 12L25 17M20 12V28" stroke="currentColor" stroke-width="2"/>
+        <rect x="8" y="10" width="24" height="20" rx="2" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
+        <path d="M18 18V22M22 18V22M20 16V24" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 14H28M12 26H28" stroke="currentColor" stroke-width="2"/>
+        <circle cx="10" cy="8" r="2" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.3"/>
+        <circle cx="30" cy="8" r="2" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.3"/>
+        <circle cx="10" cy="32" r="2" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.3"/>
+        <circle cx="30" cy="32" r="2" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.3"/>
       </svg>`
     },
     ROIIcon: {
       template: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path d="M35 15L25 5L15 15L10 10L5 15L15 25L25 15L35 15Z" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
-        <path d="M8 32L32 8M28 8H32V12" stroke="currentColor" stroke-width="2"/>
+        <rect x="5" y="25" width="6" height="10" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.1"/>
+        <rect x="13" y="20" width="6" height="15" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.15"/>
+        <rect x="21" y="15" width="6" height="20" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.2"/>
+        <rect x="29" y="10" width="6" height="25" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.25"/>
+        <path d="M8 8L16 12L24 6L32 10" stroke="currentColor" stroke-width="2"/>
+        <circle cx="8" cy="8" r="2" fill="currentColor"/>
+        <circle cx="16" cy="12" r="2" fill="currentColor"/>
+        <circle cx="24" cy="6" r="2" fill="currentColor"/>
+        <circle cx="32" cy="10" r="2" fill="currentColor"/>
+        <path d="M28 6L32 10L28 14" stroke="currentColor" stroke-width="2" fill="none"/>
       </svg>`
     }
   }
