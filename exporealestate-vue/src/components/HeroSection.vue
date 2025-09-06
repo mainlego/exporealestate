@@ -1,15 +1,49 @@
 <template>
   <section class="hero" :class="{ 'loaded': isLoaded }">
-    <!-- Background Video Layer -->
-    <div class="hero-video-layer">
-      <iframe 
-        src="https://www.youtube.com/embed/5-mqU29lUPo?autoplay=1&mute=1&loop=1&playlist=5-mqU29lUPo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        @load="handleVideoLoaded"
-        ref="heroVideo">
-      </iframe>
+    <!-- Interactive Background Layer -->
+    <div class="hero-interactive-bg" ref="interactiveBg">
+      <!-- Floating Buildings -->
+      <div class="floating-buildings">
+        <div class="building building-1" v-for="n in 8" :key="`building-${n}`" 
+             :style="getBuildingStyle(n)">
+          <div class="building-floors" :style="{ height: getRandomFloors(n) }">
+            <div class="building-floor" v-for="floor in getFloorCount(n)" :key="floor"></div>
+          </div>
+          <div class="building-glow"></div>
+        </div>
+      </div>
+
+      <!-- Animated Property Icons -->
+      <div class="property-icons">
+        <div class="property-icon" v-for="n in 15" :key="`icon-${n}`" 
+             :style="getIconStyle(n)" @click="onIconClick(n)">
+          <component :is="getPropertyIcon(n)" />
+          <div class="icon-ripple"></div>
+        </div>
+      </div>
+
+      <!-- Geometric Shapes -->
+      <div class="geometric-shapes">
+        <div class="shape" v-for="n in 20" :key="`shape-${n}`" 
+             :style="getShapeStyle(n)" :class="`shape-${getShapeType(n)}`"></div>
+      </div>
+
+      <!-- Animated Network Lines -->
+      <canvas ref="networkCanvas" class="network-canvas"></canvas>
+
+      <!-- Market Data Animation -->
+      <div class="market-data">
+        <div class="data-point" v-for="n in 6" :key="`data-${n}`" 
+             :style="getDataPointStyle(n)">
+          <div class="data-value">{{ getMarketValue(n) }}</div>
+          <div class="data-label">{{ getMarketLabel(n) }}</div>
+          <div class="data-trend" :class="getTrendDirection(n)">
+            <svg width="12" height="8" viewBox="0 0 12 8">
+              <path d="M1 7L6 2L11 7" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
     
     <!-- Background Image Layer (поверх видео) -->
@@ -103,14 +137,43 @@
 </template>
 
 <script>
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, onUnmounted, inject } from 'vue'
+
+// Property Icons Components
+const HomeIcon = {
+  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>`
+}
+
+const BuildingIcon = {
+  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.59L17 17l5-5-5-5zM4 5v14h4V5H4z"/></svg>`
+}
+
+const KeyIcon = {
+  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>`
+}
+
+const TrendIcon = {
+  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>`
+}
+
+const LocationIcon = {
+  template: `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
+}
 
 export default {
   name: 'HeroSection',
+  components: {
+    HomeIcon,
+    BuildingIcon,
+    KeyIcon,
+    TrendIcon,
+    LocationIcon
+  },
   setup() {
     const openModal = inject('openModal')
     const isLoaded = ref(false)
-    const heroVideo = ref(null)
+    const interactiveBg = ref(null)
+    const networkCanvas = ref(null)
     
     const heroStats = ref([
       { id: 1, number: '15+', label: 'стран' },
@@ -135,11 +198,142 @@ export default {
         animationDelay: `${randomDelay}s`
       }
     }
-    
-    const handleVideoLoaded = () => {
-      setTimeout(() => {
-        isLoaded.value = true
-      }, 500)
+
+    // Interactive Background Functions
+    const getBuildingStyle = (index) => ({
+      left: `${(index - 1) * 12 + Math.random() * 8}%`,
+      bottom: `${Math.random() * 20}%`,
+      animationDelay: `${index * 0.5}s`,
+      animationDuration: `${8 + Math.random() * 4}s`
+    })
+
+    const getRandomFloors = (index) => `${60 + (index % 4) * 20 + Math.random() * 40}px`
+
+    const getFloorCount = (index) => Math.floor(3 + (index % 6))
+
+    const getIconStyle = (index) => ({
+      left: `${Math.random() * 90 + 5}%`,
+      top: `${Math.random() * 80 + 10}%`,
+      animationDelay: `${index * 0.3}s`,
+      animationDuration: `${6 + Math.random() * 4}s`
+    })
+
+    const getPropertyIcon = (index) => {
+      const icons = ['HomeIcon', 'BuildingIcon', 'KeyIcon', 'TrendIcon', 'LocationIcon']
+      return icons[index % icons.length]
+    }
+
+    const getShapeStyle = (index) => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${index * 0.2}s`,
+      animationDuration: `${10 + Math.random() * 10}s`
+    })
+
+    const getShapeType = (index) => {
+      const types = ['circle', 'square', 'triangle', 'diamond']
+      return types[index % types.length]
+    }
+
+    const getDataPointStyle = (index) => ({
+      left: `${85 + Math.random() * 10}%`,
+      top: `${10 + index * 12}%`,
+      animationDelay: `${index * 0.5}s`
+    })
+
+    const getMarketValue = (index) => {
+      const values = ['₽2.4M', '↑15%', '€890K', '↗8.2%', '$1.1M', '↑12%']
+      return values[index - 1] || '₽0'
+    }
+
+    const getMarketLabel = (index) => {
+      const labels = ['Средняя цена', 'Рост за год', 'Премиум', 'Доходность', 'Элитное', 'Тренд']
+      return labels[index - 1] || 'Данные'
+    }
+
+    const getTrendDirection = (index) => {
+      return index % 2 === 0 ? 'trend-up' : 'trend-down'
+    }
+
+    const onIconClick = (index) => {
+      // Add ripple effect and scale animation
+      const icons = document.querySelectorAll('.property-icon')
+      if (icons[index - 1]) {
+        icons[index - 1].style.transform = 'scale(1.2)'
+        setTimeout(() => {
+          icons[index - 1].style.transform = 'scale(1)'
+        }, 300)
+      }
+    }
+
+    const initNetworkAnimation = () => {
+      if (!networkCanvas.value) return
+      
+      const canvas = networkCanvas.value
+      const ctx = canvas.getContext('2d')
+      
+      const resizeCanvas = () => {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+      }
+      
+      resizeCanvas()
+      window.addEventListener('resize', resizeCanvas)
+      
+      const nodes = []
+      const nodeCount = 20
+      
+      for (let i = 0; i < nodeCount; i++) {
+        nodes.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          radius: 2 + Math.random() * 3
+        })
+      }
+      
+      const animate = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        
+        // Update nodes
+        nodes.forEach(node => {
+          node.x += node.vx
+          node.y += node.vy
+          
+          if (node.x < 0 || node.x > canvas.width) node.vx *= -1
+          if (node.y < 0 || node.y > canvas.height) node.vy *= -1
+          
+          // Draw node
+          ctx.fillStyle = 'rgba(216, 4, 42, 0.6)'
+          ctx.beginPath()
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2)
+          ctx.fill()
+        })
+        
+        // Draw connections
+        ctx.strokeStyle = 'rgba(216, 4, 42, 0.2)'
+        ctx.lineWidth = 1
+        
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x
+            const dy = nodes[i].y - nodes[j].y
+            const distance = Math.sqrt(dx * dx + dy * dy)
+            
+            if (distance < 150) {
+              ctx.beginPath()
+              ctx.moveTo(nodes[i].x, nodes[i].y)
+              ctx.lineTo(nodes[j].x, nodes[j].y)
+              ctx.stroke()
+            }
+          }
+        }
+        
+        requestAnimationFrame(animate)
+      }
+      
+      animate()
     }
     
     const handleLocationHover = () => {
@@ -168,15 +362,30 @@ export default {
           isLoaded.value = true
         }
       }, 2000)
+      
+      // Initialize network animation
+      initNetworkAnimation()
     })
     
     return {
       openModal,
       isLoaded,
-      heroVideo,
+      interactiveBg,
+      networkCanvas,
       heroStats,
       getParticleStyle,
-      handleVideoLoaded,
+      getBuildingStyle,
+      getRandomFloors,
+      getFloorCount,
+      getIconStyle,
+      getPropertyIcon,
+      getShapeStyle,
+      getShapeType,
+      getDataPointStyle,
+      getMarketValue,
+      getMarketLabel,
+      getTrendDirection,
+      onIconClick,
       handleLocationHover,
       handleLocationLeave,
       handleButtonHover,
@@ -657,6 +866,258 @@ export default {
   }
 }
 
+/* INTERACTIVE BACKGROUND ELEMENTS */
+.hero-interactive-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Floating Buildings */
+.floating-buildings {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+}
+
+.building {
+  position: absolute;
+  bottom: 0;
+  width: 60px;
+  animation: buildingFloat infinite ease-in-out;
+}
+
+.building-floors {
+  background: linear-gradient(180deg, rgba(216, 4, 42, 0.8) 0%, rgba(216, 4, 42, 0.6) 100%);
+  width: 100%;
+  position: relative;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 0 20px rgba(216, 4, 42, 0.3);
+}
+
+.building-floor {
+  height: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.building-floor:before {
+  content: '';
+  position: absolute;
+  right: 5px;
+  top: 3px;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 0, 0.8);
+  border-radius: 1px;
+  animation: windowBlink 3s infinite;
+}
+
+.building-glow {
+  position: absolute;
+  bottom: -10px;
+  left: -20px;
+  right: -20px;
+  height: 20px;
+  background: linear-gradient(180deg, transparent 0%, rgba(216, 4, 42, 0.4) 100%);
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+@keyframes buildingFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes windowBlink {
+  0%, 70% { opacity: 1; }
+  85% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+/* Property Icons */
+.property-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.property-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(216, 4, 42, 0.9);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  pointer-events: all;
+  animation: iconFloat infinite ease-in-out;
+  box-shadow: 0 4px 20px rgba(216, 4, 42, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.property-icon:hover {
+  transform: scale(1.2);
+  box-shadow: 0 6px 30px rgba(216, 4, 42, 0.6);
+}
+
+.icon-ripple {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(216, 4, 42, 0.6);
+  border-radius: 50%;
+  animation: iconRipple 2s infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(90deg); }
+  50% { transform: translateY(0px) rotate(180deg); }
+  75% { transform: translateY(-5px) rotate(270deg); }
+}
+
+@keyframes iconRipple {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 0.4; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Geometric Shapes */
+.geometric-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.3;
+  animation: shapeFloat infinite linear;
+}
+
+.shape-circle {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, rgba(216, 4, 42, 0.6), rgba(255, 255, 255, 0.3));
+}
+
+.shape-square {
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(45deg, rgba(216, 4, 42, 0.6), rgba(255, 255, 255, 0.3));
+  transform: rotate(45deg);
+}
+
+.shape-triangle {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid rgba(216, 4, 42, 0.6);
+}
+
+.shape-diamond {
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(45deg, rgba(216, 4, 42, 0.6), rgba(255, 255, 255, 0.3));
+  transform: rotate(45deg);
+  border-radius: 4px;
+}
+
+@keyframes shapeFloat {
+  0% { transform: translateY(100vh) rotate(0deg); }
+  100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+/* Network Canvas */
+.network-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+}
+
+/* Market Data */
+.market-data {
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.data-point {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 0.8rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  animation: dataSlideIn 0.6s ease-out both;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.data-value {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.data-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  color: white;
+}
+
+.data-trend {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trend-up {
+  color: #4CAF50;
+}
+
+.trend-down {
+  color: #ff4444;
+  transform: rotate(180deg);
+}
+
+@keyframes dataSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* ANIMATION KEYFRAMES */
 @keyframes slideInDown {
   from {
@@ -681,6 +1142,27 @@ export default {
 }
 
 /* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  /* Market Data Mobile Positioning */
+  .market-data {
+    right: 20px;
+    top: 120px;
+  }
+  
+  .data-point {
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .data-value {
+    font-size: 1rem;
+  }
+  
+  .data-label {
+    font-size: 0.7rem;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     min-height: 600px;
@@ -716,6 +1198,61 @@ export default {
     padding: 1.25rem 2rem;
     justify-content: center;
   }
+
+  /* Interactive Background Mobile Adaptations */
+  .floating-buildings {
+    height: 30%;
+  }
+  
+  .building {
+    width: 40px;
+  }
+  
+  .building-floors {
+    border-radius: 2px 2px 0 0;
+  }
+  
+  .building-floor {
+    height: 12px;
+  }
+  
+  .building-floor:before {
+    width: 6px;
+    height: 6px;
+    right: 3px;
+    top: 2px;
+  }
+  
+  .property-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .icon-ripple {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .shape-circle, .shape-square, .shape-diamond {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .shape-triangle {
+    border-left-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 12px;
+  }
+  
+  /* Market Data Mobile */
+  .market-data {
+    display: none; /* Hide on mobile for cleaner look */
+  }
+  
+  /* Network Canvas Mobile */
+  .network-canvas {
+    opacity: 0.3;
+  }
 }
 
 @media (max-width: 480px) {
@@ -733,7 +1270,79 @@ export default {
   }
   
   .hero-stats-preview {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Further Mobile Optimizations for Interactive Background */
+  .floating-buildings {
+    height: 25%;
+  }
+  
+  .building {
+    width: 30px;
+  }
+  
+  .building-floor {
+    height: 10px;
+  }
+  
+  .building-floor:before {
+    width: 4px;
+    height: 4px;
+    right: 2px;
+    top: 1px;
+  }
+  
+  .property-icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .icon-ripple {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .shape {
+    opacity: 0.2;
+  }
+  
+  .shape-circle, .shape-square, .shape-diamond {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .shape-triangle {
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Ultra-small screens */
+  .hero-interactive-bg {
+    opacity: 0.7; /* Reduce overall intensity */
+  }
+  
+  .floating-buildings {
+    height: 20%;
+  }
+  
+  .building {
+    width: 25px;
+  }
+  
+  .property-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .icon-ripple {
+    width: 36px;
+    height: 36px;
   }
 }
 </style>
