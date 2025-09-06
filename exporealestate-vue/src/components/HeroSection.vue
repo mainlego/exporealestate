@@ -432,7 +432,7 @@ export default {
 .hero-background-image {
   width: 100%;
   height: 100%;
-  background-image: url('/assets/images/hero-background.png');
+  background-image: url('/exporealestate/assets/images/hero-background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
