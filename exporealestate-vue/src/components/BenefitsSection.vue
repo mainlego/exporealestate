@@ -354,39 +354,67 @@ export default {
     PersonalIcon: {
       template: `
         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-          <circle cx="30" cy="18" r="8" stroke="currentColor" stroke-width="2"/>
-          <path d="M42 52C42 45.373 36.627 40 30 40S18 45.373 18 52" stroke="currentColor" stroke-width="2"/>
-          <path d="M38 28C40 26 44 28 46 32" stroke="currentColor" stroke-width="2"/>
-          <path d="M22 28C20 26 16 28 14 32" stroke="currentColor" stroke-width="2"/>
+          <circle cx="30" cy="18" r="8" stroke="currentColor" stroke-width="2.5" fill="currentColor" opacity="0.2"/>
+          <path d="M42 52C42 45.373 36.627 40 30 40S18 45.373 18 52" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="22" cy="32" r="4" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.3"/>
+          <circle cx="38" cy="32" r="4" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.3"/>
+          <path d="M26 36C26 34 27 32 30 32C33 32 34 34 34 36" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 48C12 46 14 44 18 44" stroke="currentColor" stroke-width="2"/>
+          <path d="M48 48C48 46 46 44 42 44" stroke="currentColor" stroke-width="2"/>
+          <circle cx="30" cy="15" r="2" fill="currentColor"/>
+          <circle cx="25" cy="20" r="1.5" fill="currentColor" opacity="0.7"/>
+          <circle cx="35" cy="20" r="1.5" fill="currentColor" opacity="0.7"/>
         </svg>
       `
     },
     InvestmentIcon: {
       template: `
         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-          <path d="M10 45L25 30L35 40L50 25" stroke="currentColor" stroke-width="2"/>
-          <path d="M42 25H50V33" stroke="currentColor" stroke-width="2"/>
-          <circle cx="30" cy="30" r="25" stroke="currentColor" stroke-width="2"/>
-          <path d="M20 50L25 45L30 50L35 45L40 50" stroke="currentColor" stroke-width="2"/>
+          <path d="M10 45L20 35L28 43L40 31L50 25" stroke="currentColor" stroke-width="3"/>
+          <path d="M42 25H50V33" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="20" cy="35" r="3" fill="currentColor"/>
+          <circle cx="28" cy="43" r="3" fill="currentColor"/>
+          <circle cx="40" cy="31" r="3" fill="currentColor"/>
+          <circle cx="50" cy="25" r="3" fill="currentColor"/>
+          <rect x="8" y="50" width="6" height="8" fill="currentColor" opacity="0.6"/>
+          <rect x="18" y="47" width="6" height="11" fill="currentColor" opacity="0.7"/>
+          <rect x="28" y="44" width="6" height="14" fill="currentColor" opacity="0.8"/>
+          <rect x="38" y="40" width="6" height="18" fill="currentColor" opacity="0.9"/>
+          <rect x="48" y="35" width="6" height="23" fill="currentColor"/>
+          <path d="M5 12L15 8L25 14L35 10L45 16L55 12" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
         </svg>
       `
     },
     ExclusiveIcon: {
       template: `
         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-          <path d="M30 5L35 20L50 20L38.5 30L43.5 45L30 37L16.5 45L21.5 30L10 20L25 20L30 5Z" stroke="currentColor" stroke-width="2"/>
-          <circle cx="30" cy="30" r="8" stroke="currentColor" stroke-width="2"/>
+          <path d="M30 8L34 22L48 22L37 31L41 45L30 38L19 45L23 31L12 22L26 22L30 8Z" stroke="currentColor" stroke-width="2.5" fill="currentColor" opacity="0.2"/>
+          <circle cx="30" cy="30" r="8" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.3"/>
+          <path d="M26 27L30 23L34 27" stroke="currentColor" stroke-width="2"/>
+          <path d="M26 33L30 37L34 33" stroke="currentColor" stroke-width="2"/>
+          <circle cx="18" cy="18" r="3" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.4"/>
+          <circle cx="42" cy="18" r="3" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.4"/>
+          <circle cx="18" cy="42" r="3" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.4"/>
+          <circle cx="42" cy="42" r="3" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.4"/>
+          <path d="M15 15L20 20M40 20L45 15M45 45L40 40M20 40L15 45" stroke="currentColor" stroke-width="1.5"/>
         </svg>
       `
     },
     EfficiencyIcon: {
       template: `
         <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-          <circle cx="30" cy="30" r="25" stroke="currentColor" stroke-width="2"/>
-          <path d="M30 10V30L40 40" stroke="currentColor" stroke-width="2"/>
-          <path d="M15 15L20 20" stroke="currentColor" stroke-width="2"/>
-          <path d="M45 15L40 20" stroke="currentColor" stroke-width="2"/>
-          <path d="M45 45L40 40" stroke="currentColor" stroke-width="2"/>
+          <circle cx="30" cy="30" r="25" stroke="currentColor" stroke-width="2.5" fill="currentColor" opacity="0.1"/>
+          <circle cx="30" cy="30" r="18" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.05"/>
+          <path d="M30 12V30L42 42" stroke="currentColor" stroke-width="3"/>
+          <circle cx="30" cy="30" r="3" fill="currentColor"/>
+          <path d="M28 8H32V12H28V8Z" fill="currentColor"/>
+          <path d="M48 28V32H52V28H48Z" fill="currentColor"/>
+          <path d="M28 48H32V52H28V48Z" fill="currentColor"/>
+          <path d="M8 28V32H12V28H8Z" fill="currentColor"/>
+          <path d="M44.5 13.5L47.5 16.5L45 19L42 16L44.5 13.5Z" fill="currentColor" opacity="0.7"/>
+          <path d="M44.5 46.5L47.5 43.5L45 41L42 44L44.5 46.5Z" fill="currentColor" opacity="0.7"/>
+          <path d="M15.5 13.5L18.5 16.5L16 19L13 16L15.5 13.5Z" fill="currentColor" opacity="0.7"/>
+          <path d="M15.5 46.5L18.5 43.5L16 41L13 44L15.5 46.5Z" fill="currentColor" opacity="0.7"/>
         </svg>
       `
     }
