@@ -836,7 +836,12 @@ export default {
 @media (max-width: 1200px) {
   .investment-content {
     grid-template-columns: 1fr;
-    gap: var(--spacing-2xl);
+    gap: var(--spacing-xl);
+  }
+  
+  .types-list {
+    max-height: none;
+    overflow-y: visible;
   }
   
   .floating-stats {
@@ -847,29 +852,189 @@ export default {
     justify-content: center;
     margin-top: var(--spacing-lg);
   }
+  
+  .section-header h2 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 768px) {
   .investment-types {
-    padding: var(--spacing-2xl) 0;
+    padding: var(--spacing-xl) 0;
+    min-height: auto;
+  }
+  
+  .section-header {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .section-badge {
+    font-size: 0.85rem;
+    padding: 10px 20px;
+  }
+  
+  .section-header h2 {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+  
+  .types-list {
+    gap: var(--spacing-md);
   }
   
   .type-item {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
   }
   
   .type-item:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-8px) scale(1.01);
+  }
+  
+  .type-number {
+    font-size: 2.5rem;
+    top: 15px;
+    right: 20px;
+  }
+  
+  .type-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .type-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .type-content p {
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .feature {
+    font-size: 0.75rem;
+    padding: 4px 8px;
   }
   
   .floating-stats {
     flex-direction: column;
     align-items: center;
+    gap: 12px;
   }
   
   .stat-card {
     width: 100%;
-    max-width: 200px;
+    max-width: 280px;
+    padding: 12px;
+  }
+  
+  .stat-number {
+    font-size: 1.1rem;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .investment-types {
+    padding: var(--spacing-lg) 0;
+  }
+  
+  .section-header {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .section-badge {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+  
+  .section-header h2 {
+    font-size: clamp(1.5rem, 8vw, 2.2rem);
+    line-height: 1.1;
+  }
+  
+  .section-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .investment-content {
+    gap: var(--spacing-lg);
+  }
+  
+  .types-list {
+    gap: var(--spacing-sm);
+  }
+  
+  .type-item {
+    padding: var(--spacing-sm);
+    border-radius: 15px;
+  }
+  
+  .type-number {
+    font-size: 2rem;
+    top: 12px;
+    right: 15px;
+  }
+  
+  .type-icon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .icon-wrapper {
+    border-radius: 15px;
+  }
+  
+  .type-content h3 {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+  
+  .type-content p {
+    font-size: 0.8rem;
+  }
+  
+  .type-features {
+    gap: 4px;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .feature {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    border-radius: 10px;
+  }
+  
+  .progress-value {
+    font-size: 1rem;
+  }
+  
+  .stat-card {
+    padding: 10px;
+    border-radius: 12px;
+  }
+  
+  .stat-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .stat-number {
+    font-size: 1rem;
   }
 }
 </style>

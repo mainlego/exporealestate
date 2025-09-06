@@ -7,7 +7,7 @@
         </div>
         
         <div class="nav-links" :class="{ 'active': mobileMenuOpen }">
-          <a href="#about" @click="closeMenu">О выставке</a>
+          <a href="#about" @click="closeMenu">О&nbsp;выставке</a>
           <a href="#benefits" @click="closeMenu">Преимущества</a>
           <a href="#participants" @click="closeMenu">Участники</a>
           <a href="#contacts" @click="closeMenu">Контакты</a>
@@ -114,16 +114,20 @@ export default {
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: clamp(1rem, 3vw, 2.5rem);
   flex: 1;
   justify-content: center;
+  align-items: center;
 }
 
 .nav-links a {
   font-weight: var(--font-weight-medium);
   color: var(--color-text);
   position: relative;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.25rem;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  white-space: nowrap;
+  text-align: center;
 }
 
 .nav-links a::after {
@@ -143,19 +147,25 @@ export default {
 
 .header-contacts {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
+  align-items: center;
 }
 
 .contact-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   color: var(--color-text);
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  white-space: nowrap;
 }
 
 .contact-link:hover {
   color: var(--color-primary);
+}
+
+.contact-link svg {
+  flex-shrink: 0;
 }
 
 .btn-header {
@@ -178,24 +188,67 @@ export default {
   transition: var(--transition);
 }
 
+@media (max-width: 1200px) {
+  .nav-links {
+    gap: clamp(0.5rem, 2vw, 1.5rem);
+  }
+  
+  .nav-links a {
+    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+    padding: 0.5rem 0.15rem;
+  }
+}
+
 @media (max-width: 1024px) {
+  .header-contacts .contact-link:last-child {
+    display: none;
+  }
+  
+  .btn-header {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 900px) {
   .header-contacts {
     display: none;
+  }
+  
+  .nav-links {
+    gap: clamp(0.8rem, 3vw, 1.5rem);
   }
 }
 
 @media (max-width: 768px) {
+  .nav {
+    padding: 0.75rem 0;
+  }
+  
+  .logo img {
+    height: 45px;
+  }
+  
   .nav-links {
     position: fixed;
     top: 70px;
     left: 0;
     right: 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
     flex-direction: column;
     padding: 2rem;
     transform: translateX(-100%);
-    transition: transform 0.3s;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    gap: 1.5rem;
+    z-index: 999;
+  }
+  
+  .nav-links a {
+    font-size: 1.1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
   
   .nav-links.active {
@@ -207,7 +260,24 @@ export default {
   }
   
   .btn-header {
-    display: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 0.5rem 0;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .btn-header {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    border-radius: 20px;
   }
 }
 </style>
