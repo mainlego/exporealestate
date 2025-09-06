@@ -2,12 +2,14 @@
   <section class="hero" :class="{ 'loaded': isLoaded }">
     <!-- Background Video Layer -->
     <div class="hero-video-layer">
-      <video autoplay muted loop playsinline @loadeddata="handleVideoLoaded" ref="heroVideo">
-        <!-- Красивое видео Москва-Сити для демонстрации -->
-        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-        <!-- Альтернативное видео -->
-        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
-      </video>
+      <iframe 
+        src="https://www.youtube.com/embed/5-mqU29lUPo?autoplay=1&mute=1&loop=1&playlist=5-mqU29lUPo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        @load="handleVideoLoaded"
+        ref="heroVideo">
+      </iframe>
     </div>
     
     <!-- Background Image Layer (поверх видео) -->
@@ -218,10 +220,11 @@ export default {
   opacity: 0.7;
 }
 
-.hero-video-layer video {
+.hero-video-layer iframe {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .hero-image-layer {
@@ -237,7 +240,7 @@ export default {
 .hero-background-image {
   width: 100%;
   height: 100%;
-  background-image: url('/assets/images/hero-background.png');
+  background-image: url('/exporealestate/assets/images/hero-background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
