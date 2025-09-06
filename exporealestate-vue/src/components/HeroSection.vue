@@ -63,10 +63,6 @@
     <div class="hero-content">
       <div class="container">
         <div class="hero-text" :class="{ 'animate': isLoaded }">
-          <div class="event-date" :style="{ animationDelay: '0.2s' }">
-            <span class="date-icon">📅</span>
-            Весна 2025, выставка недвижимости в Москве
-          </div>
           
           <h1 :style="{ animationDelay: '0.4s' }">
             <span class="title-line">EXPO REAL</span>
@@ -82,19 +78,6 @@
             который является мостом между крупнейшими российскими инвесторами и застройщиками со всего мира
           </p>
           
-          <div class="hero-location interactive-card" :style="{ animationDelay: '1s' }" @mouseenter="handleLocationHover" @mouseleave="handleLocationLeave">
-            <div class="location-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5S14.5 7.62 14.5 9S13.38 11.5 12 11.5Z" fill="currentColor"/>
-              </svg>
-              <div class="location-pulse"></div>
-            </div>
-            <div class="location-info">
-              <strong>Деловой центр Москва-Сити</strong>
-              <span>Пресненская набережная, 2</span>
-              <div class="location-additional">🏢 Башня Федерация</div>
-            </div>
-          </div>
           
           <div class="hero-cta" :style="{ animationDelay: '1.2s' }">
             <h2>Станьте частью эксклюзивного<br>сообщества лидеров рынка<br>на EXPO REAL ESTATE</h2>
@@ -522,6 +505,7 @@ export default {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
 }
 
 .hero-text.animate {
@@ -529,26 +513,6 @@ export default {
   transform: translateY(0);
 }
 
-/* EVENT DATE */
-.event-date {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, rgba(216, 4, 42, 0.9), rgba(216, 4, 42, 0.7));
-  backdrop-filter: blur(15px);
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: var(--font-weight-medium);
-  margin-bottom: 2rem;
-  border: 1px solid rgba(216, 4, 42, 0.3);
-  box-shadow: 0 8px 32px rgba(216, 4, 42, 0.3);
-  animation: slideInDown 0.8s ease-out both;
-}
-
-.date-icon {
-  font-size: 1.2rem;
-}
 
 /* TITLE */
 .hero h1 {
@@ -608,86 +572,6 @@ export default {
   animation: slideInUp 0.8s ease-out both;
 }
 
-/* INTERACTIVE LOCATION CARD */
-.hero-location {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  margin-bottom: 3rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  animation: slideInUp 0.8s ease-out both;
-}
-
-.hero-location:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.location-icon {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.location-icon svg {
-  color: var(--color-primary);
-  filter: drop-shadow(0 0 10px rgba(216, 4, 42, 0.5));
-  z-index: 1;
-}
-
-.location-pulse {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--color-primary);
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: locationPulse 2s infinite;
-}
-
-@keyframes locationPulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.3;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-}
-
-.location-info strong {
-  display: block;
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-  color: white;
-}
-
-.location-info span {
-  display: block;
-  opacity: 0.9;
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
-}
-
-.location-additional {
-  font-size: 0.9rem;
-  opacity: 0.7;
-  color: var(--color-primary);
-}
 
 /* CTA SECTION */
 .hero-cta h2 {
@@ -1169,15 +1053,9 @@ export default {
   }
   
   .hero-text {
-    text-align: center;
+    text-align: left;
   }
   
-  .hero-location {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-    padding: 1.5rem;
-  }
   
   .cta-buttons {
     flex-direction: column;
@@ -1260,10 +1138,6 @@ export default {
     padding-top: 60px;
   }
   
-  .event-date {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.5rem;
-  }
   
   .hero-description {
     font-size: 1rem;
