@@ -32,13 +32,17 @@ jobs:
           cd exporealestate-vue
           npm run build
           
+      - name: Copy build to root
+        run: |
+          cp -r exporealestate-vue/dist/* .
+          
       - name: Setup Pages
         uses: actions/configure-pages@v3
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: './exporealestate-vue/dist'
+          path: '.'
           
       - name: Deploy to GitHub Pages
         id: deployment
