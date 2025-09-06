@@ -258,7 +258,6 @@ export default {
   position: relative;
   background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
   color: white;
-  padding: var(--spacing-3xl) 0;
   overflow: hidden;
   margin: 0;
 }
