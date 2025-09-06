@@ -499,19 +499,32 @@ export default {
 .icon-wrapper {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: linear-gradient(135deg, rgba(216, 4, 42, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-primary);
   transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(216, 4, 42, 0.3);
+  box-shadow: 0 10px 30px rgba(216, 4, 42, 0.15);
+  border: 2px solid rgba(216, 4, 42, 0.2);
+}
+
+.icon-wrapper svg {
+  filter: drop-shadow(0 2px 4px rgba(216, 4, 42, 0.3));
+  transition: all 0.3s ease;
 }
 
 .advantage-card:hover .icon-wrapper {
   transform: rotateY(180deg) scale(1.1);
   box-shadow: 0 15px 40px rgba(216, 4, 42, 0.4);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.advantage-card:hover .icon-wrapper svg {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 .icon-glow {

@@ -512,14 +512,32 @@ export default {
 .city-icon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, var(--color-primary), #ff8c00);
+  background: linear-gradient(135deg, rgba(216, 4, 42, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%);
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 10px 25px rgba(216, 4, 42, 0.3);
+  color: var(--color-primary);
+  box-shadow: 0 10px 25px rgba(216, 4, 42, 0.15);
   flex-shrink: 0;
+  border: 2px solid rgba(216, 4, 42, 0.2);
+  transition: all 0.3s ease;
+}
+
+.city-icon svg {
+  filter: drop-shadow(0 2px 4px rgba(216, 4, 42, 0.3));
+  transition: all 0.3s ease;
+}
+
+.moscow-city:hover .city-icon {
+  background: linear-gradient(135deg, var(--color-primary), #ff8c00);
+  color: white;
+  border-color: var(--color-primary);
+  transform: scale(1.05) rotate(5deg);
+}
+
+.moscow-city:hover .city-icon svg {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 .city-header h3 {
@@ -589,20 +607,33 @@ export default {
 .advantage-icon {
   width: 70px;
   height: 70px;
-  background: linear-gradient(135deg, var(--color-primary), #ff8c00);
+  background: linear-gradient(135deg, rgba(216, 4, 42, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%);
   border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-primary);
   margin-bottom: var(--spacing-lg);
-  box-shadow: 0 8px 25px rgba(216, 4, 42, 0.3);
+  box-shadow: 0 8px 25px rgba(216, 4, 42, 0.15);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(216, 4, 42, 0.2);
+}
+
+.advantage-icon svg {
+  filter: drop-shadow(0 2px 4px rgba(216, 4, 42, 0.3));
   transition: all 0.3s ease;
 }
 
 .advantage-card:hover .advantage-icon {
   transform: rotateY(180deg) scale(1.1);
   box-shadow: 0 12px 35px rgba(216, 4, 42, 0.4);
+  background: linear-gradient(135deg, var(--color-primary), #ff8c00);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.advantage-card:hover .advantage-icon svg {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 .advantage-content h4 {
@@ -930,14 +961,32 @@ export default {
 .stat-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--color-primary), #ff8c00);
+  background: linear-gradient(135deg, rgba(216, 4, 42, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%);
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 8px 20px rgba(216, 4, 42, 0.3);
+  color: var(--color-primary);
+  box-shadow: 0 8px 20px rgba(216, 4, 42, 0.15);
   flex-shrink: 0;
+  border: 2px solid rgba(216, 4, 42, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat-icon svg {
+  filter: drop-shadow(0 1px 2px rgba(216, 4, 42, 0.3));
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+  background: linear-gradient(135deg, var(--color-primary), #ff8c00);
+  color: white;
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.stat-card:hover .stat-icon svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .stat-text {
